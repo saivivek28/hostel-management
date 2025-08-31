@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-top-navbar',
@@ -13,7 +14,10 @@ export class TopNavbarComponent {
   showProfileDropdown = false;
   showNotifications = false;
   
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   toggleProfileDropdown() {
     this.showProfileDropdown = !this.showProfileDropdown;
@@ -26,7 +30,8 @@ export class TopNavbarComponent {
   }
 
   logout() {
-    this.router.navigate(['/login']);
+    this.authService.logout();
+    this.showProfileDropdown = false;
   }
 
   navigateToProfile() {

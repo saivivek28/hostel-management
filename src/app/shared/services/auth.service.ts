@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface User {
   id: string;
@@ -49,10 +50,13 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    // Check token validity on service initialization
-    this.checkTokenValidity();
+    // Check token validity on service initialization only in browser
+    if (this.isBrowser()) {
+      this.checkTokenValidity();
+    }
   }
 
   /**
@@ -179,6 +183,7 @@ export class AuthService {
    * Get access token
    */
   getAccessToken(): string | null {
+    if (!this.isBrowser()) return null;
     return localStorage.getItem(this.ACCESS_TOKEN_KEY);
   }
 
@@ -186,6 +191,7 @@ export class AuthService {
    * Get refresh token
    */
   getRefreshToken(): string | null {
+    if (!this.isBrowser()) return null;
     return localStorage.getItem(this.REFRESH_TOKEN_KEY);
   }
 
@@ -193,9 +199,11 @@ export class AuthService {
    * Handle successful authentication
    */
   private handleAuthSuccess(response: AuthResponse): void {
-    localStorage.setItem(this.ACCESS_TOKEN_KEY, response.accessToken);
-    localStorage.setItem(this.REFRESH_TOKEN_KEY, response.refreshToken);
-    localStorage.setItem(this.USER_KEY, JSON.stringify(response.user));
+    if (this.isBrowser()) {
+      localStorage.setItem(this.ACCESS_TOKEN_KEY, response.accessToken);
+      localStorage.setItem(this.REFRESH_TOKEN_KEY, response.refreshToken);
+      localStorage.setItem(this.USER_KEY, JSON.stringify(response.user));
+    }
     
     this.currentUserSubject.next(response.user);
     this.isAuthenticatedSubject.next(true);
@@ -220,15 +228,18 @@ export class AuthService {
    * Clear authentication data from storage
    */
   private clearAuthData(): void {
-    localStorage.removeItem(this.ACCESS_TOKEN_KEY);
-    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
-    localStorage.removeItem(this.USER_KEY);
+    if (this.isBrowser()) {
+      localStorage.removeItem(this.ACCESS_TOKEN_KEY);
+      localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+      localStorage.removeItem(this.USER_KEY);
+    }
   }
 
   /**
    * Get user from localStorage
    */
   private getUserFromStorage(): User | null {
+    if (!this.isBrowser()) return null;
     const userStr = localStorage.getItem(this.USER_KEY);
     return userStr ? JSON.parse(userStr) : null;
   }
@@ -257,5 +268,12 @@ export class AuthService {
     if (this.getAccessToken() && !this.hasValidToken()) {
       this.logout();
     }
+  }
+
+  /**
+   * Check if running in browser environment
+   */
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
   }
 }
