@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AuthService, SignupRequest } from '../../shared/services/auth.service';
 import { LoadingService } from '../../shared/services/loading.service';
 import { domainValidator, passwordStrengthValidator, confirmPasswordValidator, roomNumberValidator } from '../../shared/validators/domain.validator';
@@ -24,7 +24,8 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private loadingService: LoadingService,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
@@ -64,8 +65,11 @@ export class SignupComponent implements OnInit {
           this.loadingService.hide();
           
           // Redirect to dashboard after successful signup
-          const redirectUrl = sessionStorage.getItem('redirectUrl') || '/home';
-          sessionStorage.removeItem('redirectUrl');
+          let redirectUrl = '/home';
+          if (this.isBrowser()) {
+            redirectUrl = sessionStorage.getItem('redirectUrl') || '/home';
+            sessionStorage.removeItem('redirectUrl');
+          }
           this.router.navigate([redirectUrl]);
         },
         error: (error) => {
@@ -173,5 +177,9 @@ export class SignupComponent implements OnInit {
     };
     
     return displayNames[fieldName] || fieldName;
+  }
+
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
   }
 }

@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { CanActivate, CanActivateChild, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -11,7 +12,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   canActivate(
@@ -36,7 +38,9 @@ export class AuthGuard implements CanActivate, CanActivateChild {
           return true;
         } else {
           // Store the attempted URL for redirecting after login
-          sessionStorage.setItem('redirectUrl', url);
+          if (isPlatformBrowser(this.platformId)) {
+            sessionStorage.setItem('redirectUrl', url);
+          }
           this.router.navigate(['/login']);
           return false;
         }

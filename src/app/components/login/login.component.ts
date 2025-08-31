@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AuthService, LoginRequest } from '../../shared/services/auth.service';
 import { LoadingService } from '../../shared/services/loading.service';
 import { domainValidator } from '../../shared/validators/domain.validator';
@@ -23,12 +23,15 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private loadingService: LoadingService,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
-    this.loadRememberedCredentials();
+    if (this.isBrowser()) {
+      this.loadRememberedCredentials();
+    }
   }
 
   private initializeForm(): void {
@@ -40,6 +43,8 @@ export class LoginComponent implements OnInit {
   }
 
   private loadRememberedCredentials(): void {
+    if (!this.isBrowser()) return;
+    
     const rememberedUser = localStorage.getItem('rememberedUser');
     if (rememberedUser) {
       try {
@@ -67,13 +72,15 @@ export class LoginComponent implements OnInit {
       };
 
       // Handle remember me
-      if (this.loginForm.value.rememberMe) {
-        localStorage.setItem('rememberedUser', JSON.stringify({
-          email: loginData.email,
-          password: loginData.password
-        }));
-      } else {
-        localStorage.removeItem('rememberedUser');
+      if (this.isBrowser()) {
+        if (this.loginForm.value.rememberMe) {
+          localStorage.setItem('rememberedUser', JSON.stringify({
+            email: loginData.email,
+            password: loginData.password
+          }));
+        } else {
+          localStorage.removeItem('rememberedUser');
+        }
       }
 
       // Use demo login for development
@@ -83,8 +90,11 @@ export class LoginComponent implements OnInit {
           this.loadingService.hide();
           
           // Redirect to intended page or dashboard
-          const redirectUrl = sessionStorage.getItem('redirectUrl') || '/home';
-          sessionStorage.removeItem('redirectUrl');
+          let redirectUrl = '/home';
+          if (this.isBrowser()) {
+            redirectUrl = sessionStorage.getItem('redirectUrl') || '/home';
+            sessionStorage.removeItem('redirectUrl');
+          }
           this.router.navigate([redirectUrl]);
         },
         error: (error) => {
@@ -151,5 +161,9 @@ export class LoginComponent implements OnInit {
     };
     
     return displayNames[fieldName] || fieldName;
+  }
+
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
   }
 }
