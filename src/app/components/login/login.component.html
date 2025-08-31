@@ -1,0 +1,99 @@
+    <!-- <div class="login-page">
+      <div class="login-image">
+        
+    </div>
+      <div class="login-form">
+        <h1 class="login-text">Login Now</h1>
+        <input type="text" placeholder="Username" [(ngModel)]="username"  class="username"/>
+        <input type="password" placeholder="Password" [(ngModel)]="password" class="password"/>
+        <button class="login-btn" (click)="login()">Login</button>
+      </div>
+    </div> -->
+
+
+
+<!-- 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | Tuga's App</title>
+</head>
+  <div class="container">
+    <div class="left-panel">
+      <h1>Welcome back!</h1>
+      <p>Simplify your workflow and boost your productivity<br>with <strong>Tuga’s App</strong>. Get started for free.</p>
+      <div class="login-form">
+  <h1 class="login-text">Login Now</h1>
+
+  <form (ngSubmit)="login()">
+      <input type="text" [(ngModel)]="username" name="username" placeholder="Username" required>
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+</div>
+      <div class="divider">or continue with</div>
+
+      <div class="social-login">
+        <button class="social-btn">G</button>
+        <button class="social-btn"></button>
+        <button class="social-btn">f</button>
+      </div>
+
+      <p class="register">Not a member? <a href="#">Register now</a></p>
+    </div>
+
+    <div class="right-panel">
+      <img src="login-illustration.svg" alt="Illustration" />
+      <p>Make your work easier and organized<br>with <strong>Tuga’s App</strong></p>
+    </div>
+  </div>
+ -->
+
+<!-- <form (ngSubmit)="login()" #loginForm="ngForm" class="login-form">
+      <input
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        placeholder="Username"
+        required
+        class="input-field"
+      />
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Password"
+        required
+        class="input-field"
+      />
+      <a class="forgot-link" href="#">Forgot Password?</a>
+      <button class="login-btn" type="submit">Login</button>
+    </form> -->
+<div class="content">
+<div class="container">
+  <div class="left-panel">
+    <h1>Welcome back!</h1>
+    <p>Simplify your workflow and boost your productivity<br>with <strong>Zephyr</strong>. Get started for free.</p>
+
+    <input type="text" placeholder="Username" [(ngModel)]="username" />
+    <input type="password" placeholder="Password" [(ngModel)]="password" />
+    <a href="#" class="forgot">Forgot Password?</a>
+    <button class="login-btn" (click)="login()">Login</button>
+
+    <div class="divider">or continue with</div>
+
+    <div class="social-login">
+      <button class="social-btn">G</button>
+      <button class="social-btn"></button>
+      <button class="social-btn">f</button>
+    </div>
+
+    <p class="register">Not a member? <a href="#">Register now</a></p>
+  </div>
+
+  <div class="right-panel">
+    <img src="https://stories.freepiklabs.com/api/vectors/computer-login/rafiki/render?color=263238FF&background=complete&hide=" alt="Illustration" />
+    <p>Make your work easier and organized<br>with <strong>Zephyr</strong></p>
+  </div>
+</div>
+</div>

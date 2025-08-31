@@ -1,0 +1,130 @@
+<app-side-bar></app-side-bar>
+<div class="main">
+  <div class="hero">
+    <h1 class="home-head" [@fadeInDelay]>Welcome to <span class="logo">Zephyr</span> Hostel</h1>
+    <p class="home-para" [@fadeInDelay]>Your comfort is our priority</p>
+  </div>
+  <button class="info" (click)="onClick()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-lg" viewBox="0 0 16 16">
+        <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0"/>
+      </svg>
+  </button>
+  <div class="contact-popup" *ngIf="showContact">
+    <div class="popup-content">
+      <h3>Contact Info</h3>
+      <p>Email: example&#64;gmail.com</p>
+      <p>Instagram: &#64;Zephyr</p>
+      <p>Phone: +91 98765 43210</p>
+      <button (click)="closePopup()">Close</button>
+    </div>
+  </div>
+  <div class="stats" [@slideIn]>
+    <div class="card">
+      <h2>{{ roomsCount }}</h2>
+      <p>Rooms</p>
+    </div>
+    <div class="card">
+      <h2>{{ residentsCount }}</h2>
+      <p>Residents</p>
+    </div>
+    <div class="card">
+      <h2>{{ totalVisits }}</h2>
+      <p>Total Visits</p>
+    </div>
+  </div>
+  <div class="date-time" [@fadeIn]>
+    <p>📅 {{ currentDate }}</p>
+    <p>⏰ {{ currentTime }}</p>
+  </div>
+  <div class="home-page">
+    <div class="carousel">
+        <div class="slides">
+            <img src="https://i.pinimg.com/736x/13/12/30/131230cc33cae12b07f9fb2cbf20a88d.jpg" alt="Slide 1" />
+            <img src="https://i.pinimg.com/736x/b8/1b/96/b81b96971350293fbe63e96f57087588.jpg" alt="Slide 2" />
+            <img src="https://i.pinimg.com/736x/3d/9b/b6/3d9bb6d145d68e8928c0513783f991d0.jpg" alt="Slide 3" />
+            <img src="https://i.pinimg.com/736x/13/12/30/131230cc33cae12b07f9fb2cbf20a88d.jpg" alt="Slide 4" />
+            <img src="https://i.pinimg.com/736x/b8/1b/96/b81b96971350293fbe63e96f57087588.jpg" alt="Slide 5" />
+            <img src="https://i.pinimg.com/736x/3d/9b/b6/3d9bb6d145d68e8928c0513783f991d0.jpg" alt="Slide 6" />
+        </div>
+    </div>
+  </div>
+  <div class="facilities-card1">
+      <div class="set1">
+          <img src="https://i.pinimg.com/736x/de/e2/f2/dee2f23786bdf9f1444e7d18d0b3a0cb.jpg" alt="error" class="set-images"/>
+      </div>
+      <div class="set2">
+        <h1>🛏 Accommodation</h1>
+        <p> 
+            Spacious, well-ventilated rooms are available in single, double, or triple sharing options. 
+            Each room is furnished with beds, study tables, chairs, and personal wardrobes. 
+            Housekeeping services maintain cleanliness on a regular schedule.
+        </p>
+      </div>
+  </div>
+  <hr>
+  <div class="facilities-card1">
+      <div class="set2">
+        <h1>🍽 Dining & Mess</h1>
+          <p>
+            A hygienic and well-maintained mess provides nutritious and balanced meals three times a day, along with evening snacks. 
+            The menu is designed to cater to diverse tastes, and special care is taken to maintain food quality.
+          </p>
+      </div>
+      <div class="set1">
+          <img src="https://i.pinimg.com/736x/ba/c2/31/bac2317793aa3374b66f2bfd5bb965d2.jpg" alt="error" class="set-images"/>
+      </div>
+  </div>
+  <hr>
+  <div class="facilities-card1">
+      <div class="set1">
+          <img src="https://i.pinimg.com/736x/2f/e9/44/2fe944a7c8bb47cb231b3f2f9dc54514.jpg" alt="error" class="set-images"/>
+      </div>
+      <div class="set2">
+        <h1>🏸 Gym & Sports</h1>  
+        <p>
+           Hostel residents have access to a gym and outdoor sports facilities like basketball, 
+           volleyball, and badminton courts, fostering a healthy lifestyle.
+        </p>
+      </div>    
+  </div>
+  <hr>
+  <div class="facilities-card1">
+      <div class="set2">
+        <h1>📶 Wi-Fi & Study Areas</h1>
+        <p>
+           High-speed internet connectivity provided throughout the hostel along 
+           with dedicated study rooms or common study halls for group and individual learning.High-speed
+           internet connectivity provided throughout the hostel along with dedicated 
+           study rooms or common study halls for group and individual learning.
+        </p>
+      </div> 
+      <div class="set1">
+          <img src="https://i.pinimg.com/736x/3e/01/5e/3e015e9d57501e22227480b5e2eb0462.jpg" alt="error" class="set-images"/>
+      </div> 
+  </div>
+  <hr>
+  <div class="facilities-card1">
+      <div class="set1">
+          <img src="https://i.pinimg.com/736x/52/17/d3/5217d3df69180cbc1f2fe31e26e54080.jpg" alt="error" class="set-images"/>
+      </div> 
+      <div class="set2">
+        <h1>🚑 Medical Facilities</h1>
+        <p>
+           First-aid kits and tie-ups with nearby hospitals or clinics to handle medical emergencies.
+        </p>
+      </div> 
+  </div>
+  <hr>
+  <div class="facilities-card1">
+      <div class="set2">
+        <h1>🔒 Security</h1>
+        <p>
+           24x7 security with CCTV surveillance, warden supervision, and secure entry systems to ensure safety.
+            warden supervision, and secure entry systems to ensure safety.
+        </p>
+      </div> 
+      <div class="set1">
+          <img src="https://i.pinimg.com/736x/88/b2/46/88b24642e81f9c5fcef53d60d04a6273.jpg" alt="error" class="set-images"/>
+      </div> 
+  </div>
+</div>

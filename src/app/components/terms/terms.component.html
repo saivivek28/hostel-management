@@ -1,0 +1,57 @@
+<app-side-bar></app-side-bar>
+
+<div class="terms-container" [@fadeIn]>
+  <h1>Terms & Conditions</h1>
+
+  <section>
+    <h2>1. Admission & Deposit</h2>
+    <ul>
+      <li>Every resident must submit a valid government ID proof at the time of admission.</li>
+      <li>A caution deposit of ₹5,000 must be paid at the time of joining. This is refundable at the time of leaving after room inspection.</li>
+      <li>Advance rent for one month is mandatory during admission.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. Rent & Maintenance</h2>
+    <ul>
+      <li>Monthly rent must be paid before the 5th of every month.</li>
+      <li>A late fee of ₹100/day will be charged after the due date.</li>
+      <li>Maintenance fee of ₹500/month includes cleaning, repairs, and water charges.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. Room Rules</h2>
+    <ul>
+      <li>Keep your room and common areas clean and tidy.</li>
+      <li>Damaging property or misuse of electric appliances will lead to a penalty or expulsion.</li>
+      <li>Cooking inside rooms is strictly prohibited.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Guest Policy</h2>
+    <ul>
+      <li>Visitors are allowed only during visiting hours: 9 AM to 7 PM.</li>
+      <li>Overnight stay of guests is strictly not allowed without prior written permission.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. General Rules</h2>
+    <ul>
+      <li>Alcohol, smoking, and illegal substances are strictly prohibited.</li>
+      <li>Residents must return by 10:00 PM daily.</li>
+      <li>Management has the right to terminate stay for repeated violations.</li>
+    </ul>
+  </section>
+
+  <p class="note"><strong>Note:</strong> By enrolling, you agree to abide by these rules. Violation may result in fines or cancellation of accommodation without refund.</p>
+</div> 
+
+<div class="deposit-container" [@fadeInDelay]>
+  <h2>Secure Your Stay Today!</h2>
+  <p>Pay your deposit now and lock in your room. Enjoy a hassle-free experience with clean, secure, and comfortable living.</p>
+  <button (click)="payDeposit()">Pay Deposit & Accept Terms</button>
+</div>
