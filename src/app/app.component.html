@@ -1,11 +1,10 @@
-<!-- <div class="app-container">
-  <app-side-bar *ngIf="showSidebar"></app-side-bar>
-  <div class="main-content">
-    <router-outlet></router-outlet>
+<div class="app-container">
+  <app-top-navbar *ngIf="showNavbar"></app-top-navbar>
+  <div class="content-wrapper">
+    <app-side-bar *ngIf="showSidebar"></app-side-bar>
+    <main class="main-content" [class.with-sidebar]="showSidebar">
+      <router-outlet></router-outlet>
+    </main>
   </div>
-</div>
- -->
-
-<div class="main-content">
-    <router-outlet></router-outlet>
+  <app-loading-spinner></app-loading-spinner>
 </div> 

@@ -1,25 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-.login-container {
+.signup-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #a37e54, #c49568);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 20px;
   font-family: 'Inter', sans-serif;
 }
 
-.login-card {
+.signup-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  max-width: 1000px;
+  max-width: 1200px;
   width: 100%;
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  min-height: 600px;
+  min-height: 700px;
 }
 
 /* Left Panel */
@@ -88,10 +88,16 @@
 }
 
 /* Form Styles */
-.login-form {
+.signup-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 .form-group {
@@ -180,17 +186,16 @@
   font-size: 14px;
 }
 
-.form-options {
+.checkbox-group {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 8px 0;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .checkbox-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   cursor: pointer;
   font-size: 14px;
   color: #666;
@@ -198,28 +203,23 @@
 }
 
 .checkbox-wrapper input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   accent-color: #a37e54;
   cursor: pointer;
 }
 
-.checkmark {
-  display: none;
-}
-
-.forgot-password {
+.checkbox-wrapper a {
   color: #a37e54;
   text-decoration: none;
-  font-size: 14px;
   font-weight: 500;
 }
 
-.forgot-password:hover {
+.checkbox-wrapper a:hover {
   text-decoration: underline;
 }
 
-.login-button {
+.signup-button {
   width: 100%;
   padding: 16px;
   background: linear-gradient(135deg, #a37e54, #c49568);
@@ -235,12 +235,12 @@
   overflow: hidden;
 }
 
-.login-button:hover:not(:disabled) {
+.signup-button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(163, 126, 84, 0.3);
 }
 
-.login-button:disabled {
+.signup-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
@@ -261,32 +261,7 @@
   100% { transform: rotate(360deg); }
 }
 
-.demo-credentials {
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  padding: 12px;
-  text-align: center;
-  margin-top: 16px;
-}
-
-.demo-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: #666;
-  margin: 0 0 4px 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.demo-info {
-  font-size: 13px;
-  color: #333;
-  margin: 0;
-  font-family: 'Courier New', monospace;
-}
-
-.signup-link {
+.login-link {
   text-align: center;
   color: #666;
   font-size: 14px;
@@ -357,7 +332,7 @@
 
 /* Responsive Design */
 @media (max-width: 968px) {
-  .login-card {
+  .signup-card {
     grid-template-columns: 1fr;
     max-width: 500px;
   }
@@ -377,10 +352,15 @@
   .brand-name {
     font-size: 24px;
   }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 @media (max-width: 480px) {
-  .login-container {
+  .signup-container {
     padding: 16px;
   }
   
@@ -397,7 +377,7 @@
     font-size: 14px;
   }
   
-  .login-button {
+  .signup-button {
     padding: 14px;
   }
 }

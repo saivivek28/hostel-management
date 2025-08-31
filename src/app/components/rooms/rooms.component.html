@@ -1,35 +1,32 @@
-<app-side-bar></app-side-bar>
-
-<div class="room-grid" *ngIf="!selectedRoom">
-  <div class="room-card" *ngFor="let room of allRooms">
-    <img [src]="room.image" alt="{{room.sharing}} {{room.type}} Room" />
-    <div class="room-content">
-      <h3>{{ room.sharing }} Sharing</h3>
-      <p class="type-tag" [ngClass]="{'ac': room.type === 'AC', 'non-ac': room.type === 'Non-AC'}">{{ room.type }}</p>
-      <p class="cost">₹{{ room.cost }} / month</p>
-      <button class="deal-btn" (click)="enroll(room)">Grab Deal</button>
+<div class="rooms-container">
+  <div class="room-grid" *ngIf="!selectedRoom" [@fadeIn]>
+    <div class="room-card" *ngFor="let room of allRooms" [@fadeIn]>
+      <img [src]="room.image" alt="{{room.sharing}} {{room.type}} Room" />
+      <div class="room-content">
+        <h3>{{ room.sharing }} Sharing</h3>
+        <p class="type-tag" [ngClass]="{'ac': room.type === 'AC', 'non-ac': room.type === 'Non-AC'}">{{ room.type }}</p>
+        <p class="cost">₹{{ room.cost }} / month</p>
+        <button class="deal-btn" (click)="enroll(room)">Grab Deal</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Show payment when selectedRoom is set -->
-<div *ngIf="selectedRoom" class="payment-section">
-  <h2 class="payment-details">Payment for {{ selectedRoom.sharing }} Sharing ({{ selectedRoom.type }})</h2>
+  <!-- Show payment when selectedRoom is set -->
+  <div *ngIf="selectedRoom" class="payment-section" [@slideIn]>
+    <h2 class="payment-details">Payment for {{ selectedRoom.sharing }} Sharing ({{ selectedRoom.type }})</h2>
     <img [src]="selectedRoom.image" alt="{{ selectedRoom.sharing }} Sharing {{ selectedRoom.type }}" class="room-image" />
- 
-  <p>Total Cost: ₹{{ selectedRoom.cost }}</p>
-
-  <div class="btns">
-     <button class="back-btn" (click)="selectedRoom = null">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-         <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
-      </svg> Back</button>
-    <button class="pay-now" (click)="makePayment()">Pay Now</button>
+    <p>Total Cost: ₹{{ selectedRoom.cost }}</p>
+    <div class="btns">
+      <button class="back-btn" (click)="selectedRoom = null">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+          <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+        </svg> Back
+      </button>
+      <button class="pay-now" (click)="makePayment()">Pay Now</button>
+    </div>
   </div>
-</div>  
 
-
-<div class="facility-grid">
+  <div class="facility-grid" [@fadeIn]>
   <div class="facility-card" @fadeIn>
     <h2>Room Facilities</h2>
     <ul class="facility-list">
@@ -61,5 +58,6 @@
       <li>🎮 Indoor Games / Lounge</li>
       <li>🚗 Parking Area</li>
     </ul>
+  </div>
   </div>
 </div>

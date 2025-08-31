@@ -22,11 +22,12 @@
 //   ]
 // };
 
-// app.config.ts
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideClientHydration } from '@angular/platform-browser';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './shared/interceptors/auth.interceptor';
 
 import { routes } from './app.routes';
 
@@ -35,6 +36,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimations(),
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient(withInterceptors([authInterceptor]))
   ]
 };

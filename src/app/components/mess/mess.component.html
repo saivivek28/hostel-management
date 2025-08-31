@@ -1,38 +1,41 @@
-<app-side-bar></app-side-bar>
-
-<div *ngIf="!selectedDay" class="menu-grid">
-  <div class="menu-card" *ngFor="let item of menuItems">
-    <img [src]="item.image" [alt]="item.title" />
-    <div class="menu-content">
-      <h3>{{ item.title }}</h3>
-      <button (click)="viewAll(item.title)">View All →</button>
-    </div>
-  </div> 
-</div>
-<div *ngIf="selectedDay">
-  <div class="menu-grid">
-      <button class="back-btn" (click)="back()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
-  </svg> Back</button>
-      <h2>{{ selectedDay }} Menu</h2>
-  </div>
-  <div class="menu-grid">
-    <div class="menu-card" *ngFor="let meal of ['Breakfast', 'Lunch', 'Dinner']">
-      <img src="assets/thali.jpg" alt="{{meal}}" />
+<div class="mess-container">
+  <div *ngIf="!selectedDay" class="menu-grid" [@fadeIn]>
+    <div class="menu-card" *ngFor="let item of menuItems" [@fadeIn]>
+      <img [src]="item.image" [alt]="item.title" />
       <div class="menu-content">
-        <h3>{{ meal }}</h3>
-        <ul>
-          <li *ngFor="let dish of menuData[selectedDay][meal]">
-            <img *ngIf="dish.image" [src]="dish.image" alt="{{ dish.item }}"
-                style="width: 50px; height: 50px; object-fit: cover; margin-right: 8px;">
-            <div>
-              {{ dish.item }} -
-              <span [class.available]="dish.available" [class.not-available]="!dish.available">
-                {{ dish.available ? 'Available' : 'Not Available' }}
-              </span>
-            </div>
-          </li>
-        </ul>
+        <h3>{{ item.title }}</h3>
+        <button (click)="viewAll(item.title)">View All →</button>
+      </div>
+    </div> 
+  </div>
+
+  <div *ngIf="selectedDay" [@slideIn]>
+    <div class="menu-header">
+      <button class="back-btn" (click)="back()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+          <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+        </svg> Back
+      </button>
+      <h2>{{ selectedDay }} Menu</h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card" *ngFor="let meal of ['Breakfast', 'Lunch', 'Dinner']" [@fadeIn]>
+        <img src="assets/thali.jpg" alt="{{meal}}" />
+        <div class="menu-content">
+          <h3>{{ meal }}</h3>
+          <ul>
+            <li *ngFor="let dish of menuData[selectedDay][meal]">
+              <img *ngIf="dish.image" [src]="dish.image" alt="{{ dish.item }}"
+                  style="width: 50px; height: 50px; object-fit: cover; margin-right: 8px;">
+              <div>
+                {{ dish.item }} -
+                <span [class.available]="dish.available" [class.not-available]="!dish.available">
+                  {{ dish.available ? 'Available' : 'Not Available' }}
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

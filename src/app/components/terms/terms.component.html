@@ -1,6 +1,5 @@
-<app-side-bar></app-side-bar>
-
-<div class="terms-container" [@fadeIn]>
+<div class="terms-page">
+  <div class="terms-container" [@fadeIn]>
   <h1>Terms & Conditions</h1>
 
   <section>
@@ -50,8 +49,9 @@
   <p class="note"><strong>Note:</strong> By enrolling, you agree to abide by these rules. Violation may result in fines or cancellation of accommodation without refund.</p>
 </div> 
 
-<div class="deposit-container" [@fadeInDelay]>
-  <h2>Secure Your Stay Today!</h2>
-  <p>Pay your deposit now and lock in your room. Enjoy a hassle-free experience with clean, secure, and comfortable living.</p>
-  <button (click)="payDeposit()">Pay Deposit & Accept Terms</button>
+  <div class="deposit-container" [@fadeInDelay]>
+    <h2>Secure Your Stay Today!</h2>
+    <p>Pay your deposit now and lock in your room. Enjoy a hassle-free experience with clean, secure, and comfortable living.</p>
+    <button (click)="payDeposit()">Pay Deposit & Accept Terms</button>
+  </div>
 </div>

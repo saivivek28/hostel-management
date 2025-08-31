@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { SideBarComponent } from "../side-bar/side-bar.component";
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
+
 @Component({ 
   selector: 'app-terms-and-conditions',
   standalone: true,
-  imports: [SideBarComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './terms.component.html',
   styleUrls: ['./terms.component.css'],
   animations: [

@@ -1,14 +1,27 @@
 import { Component } from '@angular/core';
-import { SideBarComponent } from "../side-bar/side-bar.component";
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router'; 
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-mess',
   standalone: true,
   templateUrl: './mess.component.html',
   styleUrl: './mess.component.css',
-  imports: [SideBarComponent, CommonModule, RouterModule]
+  imports: [CommonModule],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('600ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ]),
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)' }))
+      ])
+    ])
+  ]
 })
 export class MessComponent {
 menuItems = [

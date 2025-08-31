@@ -1,23 +1,31 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  standalone: true, 
+  standalone: true,
+  imports: [RouterOutlet, CommonModule, SideBarComponent, TopNavbarComponent, LoadingSpinnerComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  imports: [
-    CommonModule,
-    RouterModule,
-]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title(title: any) {
-    throw new Error('Method not implemented.');
+  title = 'mini-project';
+  showSidebar = true;
+  showNavbar = true;
+
+  constructor(private router: Router) {
+    // Hide sidebar and navbar on login page
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.showSidebar = !event.url.includes('/login') && !event.url.includes('/signup');
+      this.showNavbar = !event.url.includes('/login') && !event.url.includes('/signup');
+    });
   }
   
 }
